@@ -1,9 +1,31 @@
-import org.junit.Test;
 
 /**
  * Created by wuhao on 6/30/16.
  */
 public class ExcelName {
+
+    public static String index2name(int index) {
+        char []cs = new char[index2len(index)];
+        ++index;
+        for (int i=cs.length; --index>=0; index/=26)
+            cs[--i] = (char)('A' + (index % 26));
+        return new String(cs);
+    }
+    static int index2len(int index) {
+        int len=0;
+        for (++index; --index>=0; index/=26)
+            len++;
+        return len;
+    }
+    public static int name2index(CharSequence name) {
+        int index = 0;
+        for (int i=0,n = name.length(); i<n; i++)
+            index = name.charAt(i)-('A'-1) + index * 26;
+        return index-1;
+    }
+
+    //////////###############################################################################################3
+
     boolean all(String s, int offset, char ch){
         for(int n=s.length(); offset<n; offset++)
             if(s.charAt(offset) != ch)
@@ -64,7 +86,6 @@ public class ExcelName {
         sb.append('A');
         return sb;
     }
-    @Test
     public void printA(){
         StringBuilder sb = new StringBuilder().append('A');
 
@@ -111,7 +132,6 @@ public class ExcelName {
         return  s;
     }
 
-    @Test
     public void testLess1(){
         StringBuilder sb = new StringBuilder();
         long t0 = System.currentTimeMillis();
